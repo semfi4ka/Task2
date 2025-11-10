@@ -1,5 +1,6 @@
 package com.filippovich.compositetask;
 
+import com.filippovich.compositetask.exeption.FileReadException;
 import com.filippovich.compositetask.exeption.TextOperationException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -55,7 +56,7 @@ public class TextProcessorMain {
                 logger.error("Text Operation failed: " + e.getMessage(), e);
             }
 
-        } catch (IOException e) {
+        } catch (FileReadException e) {
             logger.error("Error reading file: " + FILE_PATH + ". Please ensure the file exists.", e);
         }
         logger.info("Application finished.");
