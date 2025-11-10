@@ -6,11 +6,11 @@ import com.filippovich.compositetask.composite.TextComposite;
 
 public class SentenceParser extends AbstractParser {
     public SentenceParser(AbstractParser nextParser) {
-        super(nextParser, TextRegex.SENTENCE_REGEX);
+        super(nextParser, TextRegex.LEXEME_REGEX);
     }
 
     @Override
     protected TextComponent createNewComponent() {
-        return new TextComposite(TextComponentType.SENTENCE);
+        return new TextComposite(TextComponentType.LEXEME);
     }
 }

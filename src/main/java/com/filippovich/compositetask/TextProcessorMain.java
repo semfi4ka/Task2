@@ -10,7 +10,6 @@ import com.filippovich.compositetask.composite.TextComposite;
 import com.filippovich.compositetask.sorter.*;
 import com.filippovich.compositetask.parser.*;
 import com.filippovich.compositetask.reader.DataReader;
-import java.io.IOException;
 
 public class TextProcessorMain {
     private static final Logger logger = LogManager.getLogger();

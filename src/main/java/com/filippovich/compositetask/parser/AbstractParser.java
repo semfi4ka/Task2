@@ -8,7 +8,7 @@ import com.filippovich.compositetask.composite.TextComponent;
 
 public abstract class AbstractParser {
     private static final Logger logger = LogManager.getLogger();
-    private final AbstractParser nextParser;
+    private AbstractParser nextParser;
     private final String regex;
     private static int parserCount = 0;
 
