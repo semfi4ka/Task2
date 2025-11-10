@@ -1,5 +1,6 @@
 package com.filippovich.compositetask.reader;
 
+import com.filippovich.compositetask.exeption.FileReadException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import java.io.IOException;
@@ -12,7 +13,7 @@ public class DataReader {
 
     private DataReader() {}
 
-    public static String readFromFile(String filePath) throws IOException {
+    public static String readFromFile(String filePath) throws FileReadException {
         logger.info("Attempting to read file: " + filePath);
 
         String content;
@@ -26,7 +27,7 @@ public class DataReader {
             return cleanContent;
         } catch (IOException e) {
             logger.error("Failed to read file: " + filePath, e);
-            throw e;
+            throw new FileReadException("Error reading data from file: " + filePath, e);
         }
     }
 }
