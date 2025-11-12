@@ -1,4 +1,4 @@
-package com.filippovich.compositetask.sorter;
+package com.filippovich.compositetask.service;
 
 import com.filippovich.compositetask.exeption.TextOperationException;
 import org.apache.logging.log4j.LogManager;
@@ -9,7 +9,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class SortSentencesByLexemesOperation implements TextOperation {
+public class SortSentencesByLexemesOperationService implements TextOperation {
     private static final Logger logger = LogManager.getLogger();
 
     @Override

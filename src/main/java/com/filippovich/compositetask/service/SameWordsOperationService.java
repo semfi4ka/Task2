@@ -1,4 +1,4 @@
-package com.filippovich.compositetask.sorter;
+package com.filippovich.compositetask.service;
 
 import com.filippovich.compositetask.exeption.TextOperationException;
 import org.apache.logging.log4j.LogManager;
@@ -8,7 +8,7 @@ import com.filippovich.compositetask.composite.TextComponentType;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class SameWordsOperation implements TextOperation {
+public class SameWordsOperationService implements TextOperation {
     private static final Logger logger = LogManager.getLogger();
 
     @Override

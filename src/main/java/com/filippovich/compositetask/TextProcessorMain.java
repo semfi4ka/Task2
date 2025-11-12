@@ -2,12 +2,14 @@ package com.filippovich.compositetask;
 
 import com.filippovich.compositetask.exeption.FileReadException;
 import com.filippovich.compositetask.exeption.TextOperationException;
+import com.filippovich.compositetask.service.SameWordsOperationService;
+import com.filippovich.compositetask.service.SortSentencesByLexemesOperationService;
+import com.filippovich.compositetask.service.SwapFirstLastLexemeOperationService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import com.filippovich.compositetask.composite.TextComponent;
 import com.filippovich.compositetask.composite.TextComponentType;
 import com.filippovich.compositetask.composite.TextComposite;
-import com.filippovich.compositetask.sorter.*;
 import com.filippovich.compositetask.parser.*;
 import com.filippovich.compositetask.reader.DataReader;
 
@@ -37,15 +39,15 @@ public class TextProcessorMain {
 
             try {
                 logger.info("--- Executing Same Words ---");
-                SameWordsOperation op1 = new SameWordsOperation();
+                SameWordsOperationService op1 = new SameWordsOperationService();
                 System.out.println(op1.execute(textComposite));
 
                 logger.info("--- Executing Sort Sentences ---");
-                SortSentencesByLexemesOperation op2 = new SortSentencesByLexemesOperation();
+                SortSentencesByLexemesOperationService op2 = new SortSentencesByLexemesOperationService();
                 System.out.println(op2.execute(textComposite));
 
                 logger.info("--- Executing Swap Lexemes ---");
-                SwapFirstLastLexemeOperation op3 = new SwapFirstLastLexemeOperation();
+                SwapFirstLastLexemeOperationService op3 = new SwapFirstLastLexemeOperationService();
                 System.out.println(op3.execute(textComposite));
 
                 String modifiedText = textComposite.compose();

@@ -1,4 +1,4 @@
-package com.filippovich.compositetask.sorter;
+package com.filippovich.compositetask.service;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -8,7 +8,7 @@ import com.filippovich.compositetask.exeption.TextOperationException;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class SwapFirstLastLexemeOperation implements TextOperation {
+public class SwapFirstLastLexemeOperationService implements TextOperation {
     private static final Logger logger = LogManager.getLogger();
 
     @Override
