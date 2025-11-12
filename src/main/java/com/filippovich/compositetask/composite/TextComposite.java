@@ -45,12 +45,11 @@ public class TextComposite implements TextComponent {
         String delimiter;
 
         switch (type) {
+            case TEXT:
+                delimiter = "\n\n";
+                break;
             case PARAGRAPH:
-                if (!components.isEmpty() && components.get(0).getType() == TextComponentType.PARAGRAPH) {
-                    delimiter = "\n\n";
-                } else {
-                    delimiter = " ";
-                }
+                delimiter = " ";
                 break;
             case SENTENCE:
                 delimiter = " ";

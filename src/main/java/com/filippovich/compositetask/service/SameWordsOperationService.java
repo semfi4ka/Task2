@@ -15,18 +15,17 @@ public class SameWordsOperationService implements TextOperation {
     public String execute(TextComponent textComponent) throws TextOperationException {
         logger.info("Starting: Find words repeated in multiple sentences.");
 
-        if (textComponent.getType() != TextComponentType.PARAGRAPH) {
-            logger.error("Root component type is incorrect: " + textComponent.getType());
-            throw new TextOperationException("Invalid root component type. Expected PARAGRAPH.");
-        }
-
         Map<String, List<TextComponent>> wordToSentencesMap = new HashMap<>();
 
-        List<TextComponent> allSentences = textComponent.getComponents().stream()
-                .filter(s -> s.getType() == TextComponentType.SENTENCE)
-                .collect(Collectors.toList());
+        List<TextComponent> allSentences = new ArrayList<>();
+        findAllComponents(textComponent, TextComponentType.SENTENCE, allSentences);
 
-        logger.debug("Total sentences found: " + allSentences.size());
+        logger.debug("Total sentences found (recursively): " + allSentences.size());
+
+        if (allSentences.isEmpty()) {
+            logger.warn("No sentences found in the composite structure.");
+            return "No sentences were found to process.";
+        }
 
         for (TextComponent sentence : allSentences) {
             Set<String> uniqueWordsInSentence = sentence.getComponents().stream()
@@ -71,5 +70,17 @@ public class SameWordsOperationService implements TextOperation {
                 .forEach(s -> result.append(" - ").append(s.compose()).append("\n"));
 
         return result.toString();
+    }
+
+    private void findAllComponents(TextComponent component, TextComponentType typeToFind, List<TextComponent> result) {
+        if (component.getType() == typeToFind) {
+            result.add(component);
+            return;
+        }
+        if (!component.getComponents().isEmpty()) {
+            for (TextComponent child : component.getComponents()) {
+                findAllComponents(child, typeToFind, result);
+            }
+        }
     }
 }

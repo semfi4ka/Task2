@@ -1,12 +1,12 @@
 package com.filippovich.compositetask.service;
 
+import com.filippovich.compositetask.exeption.TextOperationException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import com.filippovich.compositetask.composite.TextComponent;
 import com.filippovich.compositetask.composite.TextComponentType;
-import com.filippovich.compositetask.exeption.TextOperationException;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class SwapFirstLastLexemeOperationService implements TextOperation {
     private static final Logger logger = LogManager.getLogger();
@@ -15,23 +15,27 @@ public class SwapFirstLastLexemeOperationService implements TextOperation {
     public String execute(TextComponent textComponent) throws TextOperationException {
         logger.info("Starting: Swap first and last lexemes in sentences.");
 
-        if (textComponent.getType() != TextComponentType.PARAGRAPH) {
-            logger.error("Root component type is incorrect: " + textComponent.getType());
-            throw new TextOperationException("Invalid root component type. Expected PARAGRAPH.");
-        }
+        List<TextComponent> allSentences = new ArrayList<>();
+        findAllComponents(textComponent, TextComponentType.SENTENCE, allSentences);
 
-        List<TextComponent> allSentences;
-
-        allSentences = textComponent.getComponents().stream()
-                .filter(s -> s.getType() == TextComponentType.SENTENCE)
-                .collect(Collectors.toList());
-
-        logger.debug("Total sentences found for swapping: " + allSentences.size());
+        logger.debug("Total sentences found for swapping (recursively): " + allSentences.size());
 
         allSentences.forEach(this::swapLexemesInSentence);
 
         logger.info("Finished. Lexemes swapped in all eligible sentences.");
         return "First and last lexemes swapped in every sentence.\n";
+    }
+
+    private void findAllComponents(TextComponent component, TextComponentType typeToFind, List<TextComponent> result) {
+        if (component.getType() == typeToFind) {
+            result.add(component);
+            return;
+        }
+        if (!component.getComponents().isEmpty()) {
+            for (TextComponent child : component.getComponents()) {
+                findAllComponents(child, typeToFind, result);
+            }
+        }
     }
 
     private void swapLexemesInSentence(TextComponent sentence) {

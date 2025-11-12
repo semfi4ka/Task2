@@ -29,28 +29,38 @@ public class TextProcessorMain {
             AbstractParser paragraphParser = new ParagraphParser(sentenceParser);
             AbstractParser textParser = new TextParser(paragraphParser);
 
-            TextComponent textComposite = new TextComposite(TextComponentType.PARAGRAPH);
+            TextComponent fullTextComposite = new TextComposite(TextComponentType.TEXT);
             logger.debug("Starting full text parsing...");
-            textParser.parse(textComposite, rawText);
+            textParser.parse(fullTextComposite, rawText);
             logger.info("Text successfully parsed into a hierarchical structure (Composite).");
 
-            String restoredText = textComposite.compose();
+            String restoredText = fullTextComposite.compose();
             logger.info("\n--- Restored Text ---\n" + restoredText + "\n------------------------------\n");
 
             try {
+                TextComponent serviceRoot = new TextComposite(TextComponentType.PARAGRAPH);
+
+                for (TextComponent paragraph : fullTextComposite.getComponents()) {
+                    if (paragraph.getType() == TextComponentType.PARAGRAPH) {
+                        for (TextComponent sentence : paragraph.getComponents()) {
+                            serviceRoot.add(sentence);
+                        }
+                    }
+                }
+
                 logger.info("--- Executing Same Words ---");
                 SameWordsOperationService op1 = new SameWordsOperationService();
-                System.out.println(op1.execute(textComposite));
+                System.out.println(op1.execute(serviceRoot));
 
                 logger.info("--- Executing Sort Sentences ---");
                 SortSentencesByLexemesOperationService op2 = new SortSentencesByLexemesOperationService();
-                System.out.println(op2.execute(textComposite));
+                System.out.println(op2.execute(serviceRoot));
 
                 logger.info("--- Executing Swap Lexemes ---");
                 SwapFirstLastLexemeOperationService op3 = new SwapFirstLastLexemeOperationService();
-                System.out.println(op3.execute(textComposite));
+                System.out.println(op3.execute(fullTextComposite));
 
-                String modifiedText = textComposite.compose();
+                String modifiedText = fullTextComposite.compose();
                 logger.info("--- Text after executing Modified Model ---\n" + modifiedText + "\n------------------------------\n");
 
             } catch (TextOperationException e) {
