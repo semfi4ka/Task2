@@ -1,6 +1,6 @@
 package com.filippovich.compositetask.service;
 
-import com.filippovich.compositetask.exeption.TextOperationException;
+import com.filippovich.compositetask.exeption.TextCompositeException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import com.filippovich.compositetask.composite.TextComponent;
@@ -12,7 +12,7 @@ public class SwapFirstLastLexemeOperationService implements TextOperation {
     private static final Logger logger = LogManager.getLogger();
 
     @Override
-    public String execute(TextComponent textComponent) throws TextOperationException {
+    public String execute(TextComponent textComponent) throws TextCompositeException {
         logger.info("Starting: Swap first and last lexemes in sentences.");
 
         List<TextComponent> allSentences = new ArrayList<>();

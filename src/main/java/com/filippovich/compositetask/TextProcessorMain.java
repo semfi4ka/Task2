@@ -1,7 +1,6 @@
 package com.filippovich.compositetask;
 
-import com.filippovich.compositetask.exeption.FileReadException;
-import com.filippovich.compositetask.exeption.TextOperationException;
+import com.filippovich.compositetask.exeption.TextCompositeException;
 import com.filippovich.compositetask.service.SameWordsOperationService;
 import com.filippovich.compositetask.service.SortSentencesByLexemesOperationService;
 import com.filippovich.compositetask.service.SwapFirstLastLexemeOperationService;
@@ -63,11 +62,11 @@ public class TextProcessorMain {
                 String modifiedText = fullTextComposite.compose();
                 logger.info("--- Text after executing Modified Model ---\n" + modifiedText + "\n------------------------------\n");
 
-            } catch (TextOperationException e) {
+            } catch (TextCompositeException e) {
                 logger.error("Text Operation failed: " + e.getMessage(), e);
             }
 
-        } catch (FileReadException e) {
+        } catch (TextCompositeException e) {
             logger.error("Error reading file: " + FILE_PATH + ". Please ensure the file exists.", e);
         }
         logger.info("Application finished.");

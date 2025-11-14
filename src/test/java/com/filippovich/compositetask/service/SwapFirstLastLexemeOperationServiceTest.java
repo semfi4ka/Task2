@@ -4,7 +4,7 @@ import com.filippovich.compositetask.composite.TextComponent;
 import com.filippovich.compositetask.composite.TextComponentType;
 import com.filippovich.compositetask.composite.TextComposite;
 import com.filippovich.compositetask.composite.TextLeaf;
-import com.filippovich.compositetask.exeption.TextOperationException;
+import com.filippovich.compositetask.exeption.TextCompositeException;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -21,7 +21,7 @@ class SwapFirstLastLexemeOperationServiceTest {
     }
 
     @Test
-    void testExecuteSwap() throws TextOperationException {
+    void testExecuteSwap() throws TextCompositeException {
         TextComponent s1 = new TextComposite(TextComponentType.SENTENCE);
         s1.add(createLexeme("A"));
         s1.add(createLexeme("B"));
@@ -35,7 +35,7 @@ class SwapFirstLastLexemeOperationServiceTest {
     }
 
     @Test
-    void testExecuteSwapTwo() throws TextOperationException {
+    void testExecuteSwapTwo() throws TextCompositeException {
         TextComponent s1 = new TextComposite(TextComponentType.SENTENCE);
         s1.add(createLexeme("A"));
         s1.add(createLexeme("B"));
@@ -48,7 +48,7 @@ class SwapFirstLastLexemeOperationServiceTest {
     }
 
     @Test
-    void testExecuteSwapOne() throws TextOperationException {
+    void testExecuteSwapOne() throws TextCompositeException {
         TextComponent s1 = new TextComposite(TextComponentType.SENTENCE);
         s1.add(createLexeme("A"));
         TextComponent root = new TextComposite(TextComponentType.TEXT);

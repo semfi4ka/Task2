@@ -4,7 +4,7 @@ import com.filippovich.compositetask.composite.TextComponent;
 import com.filippovich.compositetask.composite.TextComponentType;
 import com.filippovich.compositetask.composite.TextComposite;
 import com.filippovich.compositetask.composite.TextLeaf;
-import com.filippovich.compositetask.exeption.TextOperationException;
+import com.filippovich.compositetask.exeption.TextCompositeException;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -21,7 +21,7 @@ class SameWordsOperationServiceTest {
     }
 
     @Test
-    void testExecuteFindsSameWords() throws TextOperationException {
+    void testExecuteFindsSameWords() throws TextCompositeException {
         TextComponent s1 = new TextComposite(TextComponentType.SENTENCE);
         s1.add(createLexeme("it"));
         s1.add(createLexeme("works."));
@@ -48,7 +48,7 @@ class SameWordsOperationServiceTest {
     }
 
     @Test
-    void testExecuteNoRepeats() throws TextOperationException {
+    void testExecuteNoRepeats() throws TextCompositeException {
         TextComponent s1 = new TextComposite(TextComponentType.SENTENCE);
         s1.add(createLexeme("one"));
         TextComponent s2 = new TextComposite(TextComponentType.SENTENCE);

@@ -1,6 +1,6 @@
 package com.filippovich.compositetask.service;
 
-import com.filippovich.compositetask.exeption.TextOperationException;
+import com.filippovich.compositetask.exeption.TextCompositeException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import com.filippovich.compositetask.composite.TextComponent;
@@ -13,7 +13,7 @@ public class SortSentencesByLexemesOperationService implements TextOperation {
     private static final Logger logger = LogManager.getLogger();
 
     @Override
-    public String execute(TextComponent textComponent) throws TextOperationException {
+    public String execute(TextComponent textComponent) throws TextCompositeException {
         logger.info("Starting: Sort sentences by lexeme count.");
 
         List<TextComponent> allSentences = new ArrayList<>();

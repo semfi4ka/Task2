@@ -4,7 +4,7 @@ import com.filippovich.compositetask.composite.TextComponent;
 import com.filippovich.compositetask.composite.TextComponentType;
 import com.filippovich.compositetask.composite.TextComposite;
 import com.filippovich.compositetask.composite.TextLeaf;
-import com.filippovich.compositetask.exeption.TextOperationException;
+import com.filippovich.compositetask.exeption.TextCompositeException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -37,7 +37,7 @@ class SortSentencesByLexemesOperationServiceTest {
     }
 
     @Test
-    void testExecuteSort() throws TextOperationException {
+    void testExecuteSort() throws TextCompositeException {
         root.getComponents().get(0).getComponents().get(0).add(new TextComposite(TextComponentType.LEXEME));
         root.getComponents().get(0).getComponents().get(1).add(new TextComposite(TextComponentType.LEXEME));
         root.getComponents().get(0).getComponents().get(2).add(new TextComposite(TextComponentType.LEXEME));
