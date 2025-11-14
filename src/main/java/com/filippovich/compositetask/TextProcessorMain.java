@@ -49,15 +49,15 @@ public class TextProcessorMain {
 
                 logger.info("--- Executing Same Words ---");
                 SameWordsOperationService op1 = new SameWordsOperationService();
-                System.out.println(op1.execute(serviceRoot));
+                logger.info(op1.execute(serviceRoot));
 
                 logger.info("--- Executing Sort Sentences ---");
                 SortSentencesByLexemesOperationService op2 = new SortSentencesByLexemesOperationService();
-                System.out.println(op2.execute(serviceRoot));
+                logger.info("\n--- Sorted Sentences Result ---\n" + op2.execute(serviceRoot));
 
                 logger.info("--- Executing Swap Lexemes ---");
                 SwapFirstLastLexemeOperationService op3 = new SwapFirstLastLexemeOperationService();
-                System.out.println(op3.execute(fullTextComposite));
+                logger.info(op3.execute(fullTextComposite));
 
                 String modifiedText = fullTextComposite.compose();
                 logger.info("--- Text after executing Modified Model ---\n" + modifiedText + "\n------------------------------\n");
